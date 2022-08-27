@@ -2,7 +2,7 @@ import React from "react";
 import Pokemon from "./components/pokemon";
 
 export default function App() {
-  const PokemonIds = Array.from({ length: 151 }, (v, i) => i + 1);
+  const PokemonIds: number[] = Array.from({ length: 151 }, (v, i) => i + 1);
 
   return (
     <>

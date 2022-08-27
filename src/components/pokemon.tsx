@@ -1,34 +1,8 @@
 import React from "react";
-import useSWR from "swr";
-import { IPokemon } from "./types";
+import { usePokemon } from "../hooks/usePokemon";
 
-const fetcher = async (url: string): Promise<any> => {
-  try {
-    const response = await fetch(url);
-    const pokemon: any = await response.json();
-
-    const pokemonType: string = pokemon.types
-      .map((poke: any) => poke.type.name)
-      .join(", ");
-
-    const TransformedPokemon = {
-      id: pokemon.id,
-      name: pokemon.name,
-      image: `${pokemon.sprites.front_default}`,
-      type: pokemonType,
-    };
-
-    return TransformedPokemon as IPokemon;
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-export default function Pokemon({ id }: any) {
-  const { data: pokemon, error } = useSWR<IPokemon, Error>(
-    `https://pokeapi.co/api/v2/pokemon/${id}`,
-    fetcher
-  );
+export default function Pokemon({ id }: { id: number }) {
+  const { pokemon, error } = usePokemon(id);
 
   if (!error && !pokemon) {
     return <div>Loading...</div>;
