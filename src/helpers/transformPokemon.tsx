@@ -1,6 +1,7 @@
-import { IPokemon } from "../components/types";
+import { IPokeData, IPokemon } from "../components/types";
 
-export const transformPokemon = (data: any): IPokemon => {
+export const transformPokemon = (data: IPokeData): IPokemon => {
+  console.log(data);
   const pokemonType: string = data.types
     .map((poke: any) => poke.type.name)
     .join(", ");
